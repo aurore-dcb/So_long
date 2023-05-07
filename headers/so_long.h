@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 14:34:27 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 20:36:32 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_list
 // utils.c
 int					ft_strlen(char *s);
 char				*ft_strdup(char *src);
+int	ft_list_size(t_list **begin);
 // char				*ft_strcpy(char *dest, char *src);
 void				free_list(t_list **begin);
 // parsing.c

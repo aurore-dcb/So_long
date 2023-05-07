@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:13:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 15:45:27 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 20:36:20 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,22 @@ int	ft_strlen(char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+int	ft_list_size(t_list **begin)
+{
+	int len;
+	t_list *list;
+
+	len = 0;
+	list = *begin;
+	if (list)
+	{
+		while (list)
+		{
+			len++;
+			list = list->next;
+		}
+	}
+	return (len);
 }

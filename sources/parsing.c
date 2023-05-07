@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:01 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 15:44:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 20:48:53 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,60 @@ int	verifs(char *file)
 }
 
 // chemin valide
+
+void	free_tab(char **tab, int n)
+{
+	int i;
+	
+	i = 0;
+	while (i < n)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+char **create_tab(t_list **begin)
+{
+	int	i;
+	int j;
+	char **map;
+	t_list *list;
+
+	j = 0;
+	list = *begin;
+	map = malloc(sizeof(map *) * (ft_list_size(begin) + 1));
+	if (!map)
+		return (NULL);
+	while (list)
+	{
+		i = 0;
+		map[j] = malloc(sizeof(char) * (ft_strlen(list->lign) + 1));
+		if (!map[j])
+		{
+			free_tab(map, j);
+			return (NULL);
+		}
+		while (list->lign[i])
+		{
+			map[j][i] = list->lign[i];
+			i++;
+		}
+		j++;
+		list = list->next;
+	}
+	return (map);
+}
+
+int valid_path(t_list **begin)
+{
+	char	**map;
+	
+	map = create_tab(begin);
+	free(map);
+}
+
 int	parsing(int argc, char **argv)
 {
 	if (argc != 2)
