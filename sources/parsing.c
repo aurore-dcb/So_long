@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:01 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 12:08:04 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 13:26:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,25 @@ int	map_format(char *file)
 {
 	int	fd;
 
-	t_list *list; // a free
-	char *lign;   // a free
+	t_list *list;
+	char *lign;
 
 	list = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	printf("ok");
 	lign = get_next_line(fd);
-	printf("TEST : %d\n", ft_strlen(lign));
 	while (lign)
 	{
-		printf("lign = %s\n", lign);
 		if (!ft_list_push_back(&list, lign))
 			return (0);
-		printf("push_back ok\n");
 		free(lign);
 		lign = get_next_line(fd);
-		printf("ok\n");
 	}
 	close(fd);
 	display_list(list);
 	free(lign);
-	free_list1(&list);
+	free_list(&list);
 	return (1);
 }
 

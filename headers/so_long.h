@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 11:40:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 13:23:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct s_list
 
 // utils.c
 int					ft_strlen(char *s);
-char				*ft_strcpy(char *dest, char *src);
-void				free_list1(t_list **begin);
+char				*ft_strdup(char *src);
+// char				*ft_strcpy(char *dest, char *src);
+void				free_list(t_list **begin);
 // parsing.c
 int					extension(char *s);
 int					parsing(int argc, char **argv);

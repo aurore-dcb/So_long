@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:21:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 11:58:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 13:21:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	item_in_lign(char c, char *str)
 		return (0);
 	i = 0;
 	nb = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
 		if (str[i] == c)
 			nb++;
@@ -34,16 +34,12 @@ int	item_in_lign(char c, char *str)
 t_list	*ft_new_elem(char *str)
 {
 	t_list	*elem;
-
-	elem = malloc(sizeof(t_list));
+	elem = (t_list *)malloc(sizeof(t_list));
 	if (!elem || !str)
-		return (NULL);
-	printf("new_elem\n");
-	elem->lign = malloc(sizeof(ft_strlen(str) + 1));
+		return (NULL);	
+	elem->lign = ft_strdup(str);
 	if (!elem->lign)
 		return (NULL);
-	printf("ft_strlen(str) = %d\n", ft_strlen(str));
-	elem->lign = ft_strcpy(elem->lign, str);
 	elem->lign_len = ft_strlen(elem->lign);
 	elem->nb_exit = item_in_lign('E', elem->lign);
 	elem->nb_pos = item_in_lign('P', elem->lign);
@@ -59,11 +55,9 @@ int	ft_list_push_back(t_list **begin, char *lign)
 	list = *begin;
 	if (list)
 	{
-		printf("if\n");
 		while (list->next)
 			list = list->next;
 		list->next = ft_new_elem(lign);
-		printf("test\n");
 		if(!list->next)
 			return (0);
 	}
