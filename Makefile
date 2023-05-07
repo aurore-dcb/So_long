@@ -6,13 +6,13 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/05/07 09:46:32 by aducobu          ###   ########.fr        #
+#    Updated: 2023/05/07 11:00:25 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = sources/main.c sources/parsing.c
+SRCS = sources/main.c sources/parsing.c sources/create_list.c sources/utils.c
 SRCS_GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
 
 OBJS = ${SRCS:.c=.o}
@@ -21,7 +21,7 @@ OBJS_GNL = ${SRCS_GNL:.c.o}
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-RM = rm-rf
+RM = rm -rf
 
 ${NAME}:	${OBJS} ${OBJS_GNL}
 			${CC} ${CFLAGS} -o ${NAME} ${SRCS} ${SRCS_GNL}

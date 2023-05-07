@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 09:42:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 11:17:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		printf("Error\n Parsing\n");
+		printf("Error\nParsing\n");
 	}
 	return (0);
 }
