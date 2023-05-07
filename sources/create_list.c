@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:21:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 13:21:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 15:20:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	item_in_lign(char c, char *str)
 t_list	*ft_new_elem(char *str)
 {
 	t_list	*elem;
+
 	elem = (t_list *)malloc(sizeof(t_list));
 	if (!elem || !str)
-		return (NULL);	
+		return (NULL);
 	elem->lign = ft_strdup(str);
 	if (!elem->lign)
 		return (NULL);
@@ -50,7 +51,7 @@ t_list	*ft_new_elem(char *str)
 
 int	ft_list_push_back(t_list **begin, char *lign)
 {
-	t_list *list;
+	t_list	*list;
 
 	list = *begin;
 	if (list)
@@ -58,7 +59,7 @@ int	ft_list_push_back(t_list **begin, char *lign)
 		while (list->next)
 			list = list->next;
 		list->next = ft_new_elem(lign);
-		if(!list->next)
+		if (!list->next)
 			return (0);
 	}
 	else
@@ -70,16 +71,42 @@ int	ft_list_push_back(t_list **begin, char *lign)
 	return (1);
 }
 
+int	create_list(t_list **list, char *file)
+{
+	int		fd;
+	char	*lign;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	lign = get_next_line(fd);
+	while (lign)
+	{
+		if (!ft_list_push_back(list, lign))
+		{
+			free_list(list);
+			return (0);
+		}
+		free(lign);
+		lign = get_next_line(fd);
+	}
+	close(fd);
+	free(lign);
+	// display_list(*list);
+	return (1);
+}
+
+// a supprimer a la fin
 void	display_list(t_list *begin)
 {
-	t_list *list;
+	t_list	*list;
 
 	list = begin;
 	if (list)
 	{
 		while (list)
 		{
-			printf("lign : %s", list->lign);
+			printf("lign : %s\n", list->lign);
 			printf("len : %d\n", list->lign_len);
 			printf("exit : %d\n", list->nb_exit);
 			printf("pos : %d\n", list->nb_pos);

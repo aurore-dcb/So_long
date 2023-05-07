@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:01 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 13:26:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 15:44:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,34 +35,125 @@ int	extension(char *s)
 	return (1);
 }
 
-// rectangle, 1 sortie, 1 depart, >= 1 item, murs autour, que certains char
-// chemin valide
-int	map_format(char *file)
+int	is_rectangle(t_list **begin)
 {
-	int	fd;
+	t_list	*list;
 
-	t_list *list;
-	char *lign;
+	list = *begin;
+	if (list && list->next)
+	{
+		while (list->next)
+		{
+			if (list->lign_len != list->next->lign_len)
+			{
+				free_list(begin);
+				return (0);
+			}
+			list = list->next;
+		}
+	}
+	return (1);
+}
+
+int	composition(t_list **begin)
+{
+	int		e;
+	int		p;
+	int		i;
+	t_list	*list;
+
+	e = 0;
+	p = 0;
+	i = 0;
+	list = *begin;
+	while (list)
+	{
+		e += list->nb_exit;
+		p += list->nb_pos;
+		i += list->nb_item;
+		list = list->next;
+	}
+	if (e != 1 || p != 1 || i < 1)
+	{
+		free_list(begin);
+		return (0);
+	}
+	return (1);
+}
+
+int	five_char(t_list **begin)
+{
+	int		i;
+	t_list	*list;
+
+	list = *begin;
+	while (list)
+	{
+		i = 0;
+		while (list->lign[i])
+		{
+			if (list->lign[i] != '0' && list->lign[i] != '1'
+				&& list->lign[i] != 'C' && list->lign[i] != 'E'
+				&& list->lign[i] != 'P')
+			{
+				free_list(begin);
+				return (0);
+			}
+			i++;
+		}
+		list = list->next;
+	}
+	return (1);
+}
+
+int	walls(t_list **begin)
+{
+	int		i;
+	t_list	*list;
+
+	i = 0;
+	list = *begin;
+	while (list->lign[i])
+		if (list->lign[i++] != '1')
+			return (0);
+	while (list->next)
+	{
+		if (list->lign[0] != '1'
+			|| list->lign[ft_strlen(list->lign)
+				- 1] != '1')
+			return (0);
+		list = list->next;
+	}
+	i = 0;
+	while (list->lign[i])
+		if (list->lign[i++] != '1')
+			return (0);
+	return (1);
+}
+
+int	verifs(char *file)
+{
+	t_list	*list;
 
 	list = NULL;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	lign = get_next_line(fd);
-	while (lign)
-	{
-		if (!ft_list_push_back(&list, lign))
-			return (0);
-		free(lign);
-		lign = get_next_line(fd);
-	}
-	close(fd);
+	create_list(&list, file);
 	display_list(list);
-	free(lign);
+	if (!is_rectangle(&list))
+		return (0);
+	if (!composition(&list))
+		return (0);
+	if (!five_char(&list))
+		return (0);
+	if (!walls(&list))
+	{
+		free_list(&list);
+		return (0);
+	}
 	free_list(&list);
 	return (1);
 }
 
+// chemin valide
 int	parsing(int argc, char **argv)
 {
 	if (argc != 2)
@@ -70,7 +161,7 @@ int	parsing(int argc, char **argv)
 	if (!extension(argv[1]))
 		return (0);
 	printf("extension ok\n");
-	if (!map_format(argv[1]))
+	if (!verifs(argv[1]))
 		return (0);
 	return (1);
 }

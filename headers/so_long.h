@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/07 13:23:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/07 14:34:27 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void				free_list(t_list **begin);
 int					extension(char *s);
 int					parsing(int argc, char **argv);
 // create_list.c
+int					item_in_lign(char c, char *str);
 t_list				*ft_new_elem(char *str);
 int					ft_list_push_back(t_list **begin, char *lign);
+int					create_list(t_list **list, char *file);
 void				display_list(t_list *begin);
 
 #endif
