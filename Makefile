@@ -6,32 +6,43 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/05/07 13:04:30 by aducobu          ###   ########.fr        #
+#    Updated: 2023/05/29 17:41:00 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS = sources/main.c sources/parsing.c sources/create_list.c sources/utils.c
-SRCS_GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
+SRCS =	sources/main.c \
+		sources/parsing.c \
+		sources/parsing2.c \
+		sources/create_list.c \
+		sources/utils.c \
+		sources/list_to_tab.c \
+		sources/check_path.c \
+		sources/frees.c
 
 OBJS = ${SRCS:.c=.o}
-OBJS_GNL = ${SRCS_GNL:.c.o}
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
-
+CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz
 RM = rm -rf
 
-${NAME}:	${OBJS} ${OBJS_GNL}
-			${CC} ${CFLAGS} -o ${NAME} ${SRCS} ${SRCS_GNL}
+INCLUDE =  -I./mlx
 
 all:		${NAME}
 
+libft/libft.a:
+			make -C libft
+
+${NAME}:	${OBJS} libft/libft.a
+			${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${SRCS} -Llibft -lft
+
 clean:
-			${RM} ${OBJS} ${OBJS_GNL}
+			make -C libft clean
+			${RM} ${OBJS}
 			
 fclean:		clean
+			make -C libft fclean
 			${RM} ${NAME}
 
 re:			fclean all
