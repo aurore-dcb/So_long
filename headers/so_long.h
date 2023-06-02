@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/30 14:18:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/05/31 10:22:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_map
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	int				height;
+	int				width;
+	void			*img_c;
+	void			*img_e;
+	void			*img_f;
+	void			*img_p;
+	void			*img_w;
 }					t_map;
 
 // parsing2.c
