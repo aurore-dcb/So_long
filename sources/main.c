@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/31 10:25:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/02 16:04:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,50 @@
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
 
+int findX(char **map)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+				return (j);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
 
+int findY(char **map)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+				return (i);
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
 int	main(int argc, char **argv)
 {
 	t_lign	*list;
 	t_map	data;
+	char **map;
 
 	list = NULL;
 	if (!parsing(argc, argv, &list))
@@ -28,16 +67,21 @@ int	main(int argc, char **argv)
 	}
 	ft_printf("Parsing OK\n");
 	////// COMPTEUR DE MOUVEMENTS
-	free_list(&list);
 	data.mlx_ptr = NULL;
 	data.win_ptr = NULL;
-	data.height = 600;
-	data.width = 800;
-	// data.image_c = NULL;
-	if (!loop(&data))
+	data.height = ft_lstsize(list) * 64;
+	data.width = list->lign_len * 64;
+	map = list_to_tab(&list);
+	if (!map)
+		return (free_list(&list), 0);
+	data.pos_x = findX(map);
+	data.pos_y = findY(map);
+	ft_printf("pos x = %d\npos y = %d\n", data.pos_x, data.pos_y);
+	if (!loop(&data, map))
 	{
 		ft_printf("Error Loop\n");
-		return (0);
+		return (free_list(&list), 0);
 	}
+	free_list(&list);
 	return (0);
 }

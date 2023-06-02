@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/31 10:22:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/02 15:48:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ typedef struct s_map
 	void			*img_f;
 	void			*img_p;
 	void			*img_w;
+	
+	int				pos_x;
+	int				pos_y;
 }					t_map;
 
 // parsing2.c
@@ -78,9 +81,9 @@ int					valid_path(char **map);
 // init_loop.c
 int					key_hook(int keycode, void *param);
 int					close_window(void *param);
-int					loop(t_map *data);
+int					loop(t_map *data, char **map);
 
 // display_map.c
-void				display_map(t_map *map);
+void				display_map(t_map *data, char **map);
 
 #endif

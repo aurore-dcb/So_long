@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/05/30 14:14:06 by aducobu          ###   ########.fr        #
+#    Updated: 2023/06/02 15:37:48 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS =	sources/main.c \
 		sources/list_to_tab.c \
 		sources/check_path.c \
 		sources/frees.c \
-		sources/init_loop.c
+		sources/init_loop.c \
+		sources/display_map.c
 
 OBJS = ${SRCS:.c=.o}
 
