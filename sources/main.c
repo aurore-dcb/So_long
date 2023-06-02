@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/02 16:04:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/02 16:27:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error Parsing\n");
 		return (0);
 	}
-	ft_printf("Parsing OK\n");
 	////// COMPTEUR DE MOUVEMENTS
 	data.mlx_ptr = NULL;
 	data.win_ptr = NULL;
@@ -74,9 +73,6 @@ int	main(int argc, char **argv)
 	map = list_to_tab(&list);
 	if (!map)
 		return (free_list(&list), 0);
-	data.pos_x = findX(map);
-	data.pos_y = findY(map);
-	ft_printf("pos x = %d\npos y = %d\n", data.pos_x, data.pos_y);
 	if (!loop(&data, map))
 	{
 		ft_printf("Error Loop\n");

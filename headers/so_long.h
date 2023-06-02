@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/02 15:48:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/02 16:41:53 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,24 @@ typedef struct s_map
 	void			*win_ptr;
 	int				height;
 	int				width;
+
 	void			*img_c;
 	void			*img_e;
 	void			*img_f;
 	void			*img_p;
 	void			*img_w;
-	
+
 	int				pos_x;
 	int				pos_y;
 }					t_map;
+
+typedef struct s_item
+{
+	int				x;
+	int				y;
+	int active; // 1 = pas ramasse ; 0 = ramasse
+	struct s_item	*next;
+}					t_item;
 
 // parsing2.c
 int					extension(char *s);
@@ -84,6 +93,10 @@ int					close_window(void *param);
 int					loop(t_map *data, char **map);
 
 // display_map.c
-void				display_map(t_map *data, char **map);
+void				display_map(t_map *data, char **map, t_item **lst_item);
+
+// main.c
+int					findX(char **map);
+int					findY(char **map);
 
 #endif
