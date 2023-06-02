@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/05/29 17:41:00 by aducobu          ###   ########.fr        #
+#    Updated: 2023/05/30 14:14:06 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,30 +19,41 @@ SRCS =	sources/main.c \
 		sources/utils.c \
 		sources/list_to_tab.c \
 		sources/check_path.c \
-		sources/frees.c
+		sources/frees.c \
+		sources/init_loop.c
 
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz
+CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux  #-lm -lz
+MLX_FLAGS = -lmlx -lXext -lX11
 RM = rm -rf
 
-INCLUDE =  -I./mlx
+LIBFT_DIR	= libft
+LIBFT_LIB	= libft/libft.a
+MLX_DIR		= minilibx-linux
+MLX_LIB		= minilibx-linux/libmlx_Linux.a
 
 all:		${NAME}
 
 libft/libft.a:
 			make -C libft
 
-${NAME}:	${OBJS} libft/libft.a
-			${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${SRCS} -Llibft -lft
+minilibx-linux/libmlx_Linux.a:
+			make -C minilibx-linux
+
+${NAME}:	${OBJS} libft/libft.a minilibx-linux/libmlx_Linux.a
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT_LIB} ${MLX_LIB} ${MLX_FLAGS} #-Llibft -lft
 
 clean:
-			make -C libft clean
 			${RM} ${OBJS}
+			make -C libft clean
+			make -C minilibx-linux clean
 			
 fclean:		clean
-			make -C libft fclean
 			${RM} ${NAME}
+			make -C libft fclean
 
 re:			fclean all
+			make -C ${LIBFT_DIR} re
+			make -C ${MLX_DIR} re
