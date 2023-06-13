@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:13:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 11:21:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:06:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	modif_pos2(char c, int k, t_map *data)
 		if (k > 0)
 		{
 			data->pos_y++;
+			mlx_destroy_image(data->mlx_ptr, data->img_p);
 			data->img_p = mlx_xpm_file_to_image(data->mlx_ptr, "./img/p.xpm",
 					&w, &w);
 			if (!data->img_p)
@@ -66,8 +67,7 @@ int	modif_pos2(char c, int k, t_map *data)
 			data->pos_y--;
 	}
 	data->moves++;
-	ft_printf("moves = %d\n", data->moves);
-	return (1);
+	return (ft_printf("total moves = %d\n", data->moves), 1);
 }
 
 int	modif_pos(int keycode, t_map *param)
@@ -84,6 +84,7 @@ int	modif_pos(int keycode, t_map *param)
 	{
 		if (param->map[param->pos_x][param->pos_y - 1] != '1')
 		{
+			mlx_destroy_image(param->mlx_ptr, param->img_p);
 			param->img_p = mlx_xpm_file_to_image(param->mlx_ptr,
 					"./img/p_left.xpm", &w, &w);
 			if (!param->img_p)
@@ -117,25 +118,26 @@ int	still_collectible(t_map *data)
 	return (0);
 }
 
-int	loop(t_map *data)
+void	loop(t_map *data)
 {
 	data->moves = 0;
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
-		return (0);
+		return ;
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->width, data->height,
 			"So_long");
 	if (data->win_ptr == NULL)
-		return (free(data->win_ptr), 0);
+		return (free(data->win_ptr));
 	if (load_img(data) == 0)
-		return (ft_printf("error image\n"), 0);
-	if (!data->map)
-		return (ft_printf("Error lst_item\n"), 0);
+	{
+		ft_printf("error image\n");
+		return ;
+	}
 	data->pos_x = find_x(data->map);
 	data->pos_y = find_y(data->map);
+	display_map(data);
 	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, key_hook, data);
-	mlx_hook(data->win_ptr, 17, 1L << 17, close_window, data);
+	mlx_hook(data->win_ptr, 17, 1L << 17, mlx_loop_end, data->mlx_ptr);
 	mlx_loop(data->mlx_ptr);
-	return (1);
 }

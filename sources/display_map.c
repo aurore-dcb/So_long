@@ -6,13 +6,34 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:17:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 11:16:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:22:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
+
+void	display_number(t_map *data)
+{
+	int		x;
+	int		y;
+	char	*str_number;
+
+	x = 30;
+	y = 30;
+	str_number = ft_itoa(data->moves);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x - 1, y - 1, 0xFFFFFF,
+		str_number);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x + 1, y - 1, 0xFFFFFF,
+		str_number);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x - 1, y + 1, 0xFFFFFF,
+		str_number);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x + 1, y + 1, 0xFFFFFF,
+		str_number);
+	mlx_string_put(data->mlx_ptr, data->win_ptr, x, y, 0x000000, str_number);
+	free(str_number);
+}
 
 void	display_map2(t_map *data, int i, int j)
 {

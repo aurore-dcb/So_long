@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:05:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/26 23:27:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:59:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,33 @@ int	size_nb(int nb)
 	return (compteur);
 }
 
-char	*ft_itoa(int nb)
-{
-	int		i;
-	char	*res;
+// char	*ft_itoa(int nb)
+// {
+// 	int		i;
+// 	char	*res;
 
-	i = size_nb(nb);
-	res = (char *)malloc(sizeof(char) * (size_nb(nb) + 1));
-	if (!res)
-		return (NULL);
-	res[i] = '\0';
-	if (nb == 0)
-	{
-		res[0] = '0';
-		return (res);
-	}
-	if (nb < 0)
-	{
-		res[0] = '-';
-		nb *= -1;
-	}
-	while (nb)
-	{
-		res[--i] = nb % 10 + '0';
-		nb = nb / 10;
-	}
-	return (res);
-}
+// 	i = size_nb(nb);
+// 	res = (char *)malloc(sizeof(char) * (size_nb(nb) + 1));
+// 	if (!res)
+// 		return (NULL);
+// 	res[i] = '\0';
+// 	if (nb == 0)
+// 	{
+// 		res[0] = '0';
+// 		return (res);
+// 	}
+// 	if (nb < 0)
+// 	{
+// 		res[0] = '-';
+// 		nb *= -1;
+// 	}
+// 	while (nb)
+// 	{
+// 		res[--i] = nb % 10 + '0';
+// 		nb = nb / 10;
+// 	}
+// 	return (res);
+// }
 
 int	ft_print_nbr(int nb)
 {

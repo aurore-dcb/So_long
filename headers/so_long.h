@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 12:21:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:14:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define SO_LONG_H
 
 # include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 # include <fcntl.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -91,6 +93,7 @@ void				cross_map(char **map);
 int					valid_path(char **map);
 
 // display_map.c
+void				display_number(t_map *data);
 int					display_map(t_map *data);
 
 // close_window.c
@@ -103,7 +106,7 @@ int					load_img(t_map *data);
 int					modif_pos2(char c, int k, t_map *data);
 int					modif_pos(int keycode, t_map *param);
 int					still_collectible(t_map *data);
-int					loop(t_map *data);
+void				loop(t_map *data);
 
 // main.c
 int					find_x(char **map);
