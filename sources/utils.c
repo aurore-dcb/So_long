@@ -6,14 +6,14 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:13:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/29 16:33:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:13:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 #include "../libft/libft.h"
 
-static int	in_set(char const *set, const char c)
+int	in_set(char const *set, const char c)
 {
 	int	i;
 

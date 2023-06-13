@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:49:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/29 17:24:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:39:46 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	to_cross(char c)
 {
 	return (c != '1' && c != 'X' && c != 'P');
 }
+
 void	apply_cross(int i, int j, char **map)
 {
 	if (map[i][j] == 'E')
@@ -34,25 +35,21 @@ int	add_cross(char **map, int i, int j)
 	{
 		res = 1;
 		apply_cross(i - 1, j, map);
-		// map[i - 1][j] = 'X';
 	}
 	if (to_cross(map[i][j + 1]))
 	{
 		res = 1;
 		apply_cross(i, j + 1, map);
-		// map[i][j + 1] = 'X';
 	}
 	if (to_cross(map[i + 1][j]))
 	{
 		res = 1;
 		apply_cross(i + 1, j, map);
-		// map[i + 1][j] = 'X';
 	}
 	if (to_cross(map[i][j - 1]))
 	{
 		res = 1;
 		apply_cross(i, j - 1, map);
-		// map[i][j - 1] = 'X';
 	}
 	return (res);
 }

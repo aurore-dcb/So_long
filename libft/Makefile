@@ -11,12 +11,12 @@ SRCS			=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_str
 SRCS_GNL		=	get_next_line.c \
 					get_next_line_utils.c
 
-SRCS_PRINTF		=	sources/ft_printf.c \
-					sources/ft_print_hex.c \
-					sources/ft_print_nbr.c \
-					sources/ft_print_ptr.c \
-					sources/ft_print_unsigned.c \
-					sources/ft_prints.c
+SRCS_PRINTF		=	printf/ft_printf.c \
+					printf/ft_print_hex.c \
+					printf/ft_print_nbr.c \
+					printf/ft_print_ptr.c \
+					printf/ft_print_unsigned.c \
+					printf/ft_prints.c
 
 bonus 			=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c

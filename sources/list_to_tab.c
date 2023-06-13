@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:26:18 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/29 16:37:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:41:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**list_to_tab(t_lign **begin)
 	{
 		map[i] = malloc(sizeof(char) * (ft_strlen(lst->lign) + 1));
 		if (!map[i])
-			return (free_list(begin), free_tab(map), NULL);
+			return (free_tab(map), NULL);
 		j = -1;
 		while (++j < lst->lign_len)
 			map[i][j] = lst->lign[j];
@@ -40,23 +40,23 @@ char	**list_to_tab(t_lign **begin)
 	return (map);
 }
 
-void	display_tab(char **map)
-{
-	int	i;
-	int	j;
+// void	display_tab(char **map)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	ft_printf("---- map ----\n");
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			ft_printf("%c", map[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("---- fin map ----\n");
-}
+// 	i = 0;
+// 	ft_printf("---- map ----\n");
+// 	while (map[i])
+// 	{
+// 		j = 0;
+// 		while (map[i][j])
+// 		{
+// 			ft_printf("%c", map[i][j]);
+// 			j++;
+// 		}
+// 		ft_printf("\n");
+// 		i++;
+// 	}
+// 	ft_printf("---- fin map ----\n");
+// }

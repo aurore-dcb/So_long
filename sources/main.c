@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 09:03:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:21:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
 
-int findX(char **map)
+int	find_x(char **map)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	while (map[i])
 	{
@@ -34,11 +34,11 @@ int findX(char **map)
 	return (-1);
 }
 
-int findY(char **map)
+int	find_y(char **map)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	while (map[i])
 	{
@@ -53,6 +53,7 @@ int findY(char **map)
 	}
 	return (-1);
 }
+
 int	main(int argc, char **argv)
 {
 	t_lign	*list;
@@ -62,9 +63,8 @@ int	main(int argc, char **argv)
 	if (!parsing(argc, argv, &list))
 	{
 		ft_printf("Error Parsing\n");
-		return (0);
+		return (free_list(&list), 0);
 	}
-	////// COMPTEUR DE MOUVEMENTS
 	data.mlx_ptr = NULL;
 	data.win_ptr = NULL;
 	data.height = ft_lstsize(list) * 64;
@@ -72,11 +72,13 @@ int	main(int argc, char **argv)
 	data.map = list_to_tab(&list);
 	if (!data.map)
 		return (free_list(&list), 0);
+	free_list(&list);
 	if (!loop(&data))
 	{
 		ft_printf("Error Loop\n");
-		return (free_list(&list), 0);
+		free_mlx(&data);
+		return (0);
 	}
-	free_list(&list);
+	free_map(&data);
 	return (0);
 }

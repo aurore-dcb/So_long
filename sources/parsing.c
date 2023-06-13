@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:01 by aducobu           #+#    #+#             */
-/*   Updated: 2023/05/29 16:34:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 11:27:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	verifs(char *file, t_lign **list)
 {
 	char	**map;
 
-	create_list(list, file);
+	if (!create_list(list, file))
+		return (0);
 	if (!is_rectangle(list))
 		return (0);
 	if (!composition(list))
@@ -36,7 +37,6 @@ int	verifs(char *file, t_lign **list)
 	return (1);
 }
 
-// chemin valide
 int	parsing(int argc, char **argv, t_lign **list)
 {
 	if (argc != 2)
