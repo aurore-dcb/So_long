@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/02 16:41:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 09:39:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,21 @@ typedef struct s_lign
 	struct s_lign	*next;
 }					t_lign;
 
+typedef struct s_item
+{
+	int				x;
+	int				y;
+	int active; // 1 = pas ramasse ; 0 = ramasse
+	struct s_item	*next;
+}					t_item;
+
 typedef struct s_map
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int				height;
 	int				width;
+	char			**map;
 
 	void			*img_c;
 	void			*img_e;
@@ -45,15 +54,9 @@ typedef struct s_map
 
 	int				pos_x;
 	int				pos_y;
+	t_item			*item;
+	int				moves;
 }					t_map;
-
-typedef struct s_item
-{
-	int				x;
-	int				y;
-	int active; // 1 = pas ramasse ; 0 = ramasse
-	struct s_item	*next;
-}					t_item;
 
 // parsing2.c
 int					extension(char *s);
@@ -88,12 +91,14 @@ void				cross_map(char **map);
 int					valid_path(char **map);
 
 // init_loop.c
-int					key_hook(int keycode, void *param);
+// int					key_hook(int keycode, void *param);
 int					close_window(void *param);
-int					loop(t_map *data, char **map);
+int					still_collectible(t_map *data);
+int					loop(t_map *data);
+void				display_list_item(t_item *begin);
 
 // display_map.c
-void				display_map(t_map *data, char **map, t_item **lst_item);
+int					display_map(t_map *data);
 
 // main.c
 int					findX(char **map);

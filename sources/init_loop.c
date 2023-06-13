@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:13:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/02 16:56:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 10:07:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,15 @@
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
 
-int key_hook(int keycode, void *param)
+int	close_window(void *param)
 {
-	if (keycode == 65307)
-	{
-		void *win_ptr = param;
-    	void *mlx_ptr = mlx_get_data_addr(win_ptr, NULL, NULL, NULL);
-		mlx_destroy_window(mlx_ptr, win_ptr);
-	}
-    return 0;
-}
+	void	*win_ptr;
+	void	*mlx_ptr;
 
-int close_window(void *param)
-{
-	void *win_ptr = param;
-    void *mlx_ptr = mlx_get_data_addr(win_ptr, NULL, NULL, NULL);
+	win_ptr = param;
+	mlx_ptr = mlx_get_data_addr(win_ptr, NULL, NULL, NULL);
 	mlx_destroy_window(mlx_ptr, win_ptr);
-	return 0;
+	return (0);
 }
 
 int	load_img(t_map *data)
@@ -42,19 +34,19 @@ int	load_img(t_map *data)
 	data->img_f = NULL;
 	data->img_w = NULL;
 	data->img_e = NULL;
-	data->img_p = mlx_xpm_file_to_image(data->mlx_ptr, "./images/sport_car.xpm", &w, &w);
+	data->img_p = mlx_xpm_file_to_image(data->mlx_ptr, "./img/p.xpm", &w, &w);
 	if (!data->img_p)
 		return (ft_printf("p\n"), 0);
-	data->img_c = mlx_xpm_file_to_image(data->mlx_ptr, "./images/gas_bottle.xpm", &w, &w);
+	data->img_c = mlx_xpm_file_to_image(data->mlx_ptr, "./img/c.xpm", &w, &w);
 	if (!data->img_c)
 		return (ft_printf("c\n"), 0);
-	data->img_w = mlx_xpm_file_to_image(data->mlx_ptr, "./images/roue.xpm", &w, &w);
+	data->img_w = mlx_xpm_file_to_image(data->mlx_ptr, "./img/w.xpm", &w, &w);
 	if (!data->img_w)
 		return (ft_printf("w\n"), 0);
-	data->img_f = mlx_xpm_file_to_image(data->mlx_ptr, "./images/back_gray.xpm", &w, &w);
+	data->img_f = mlx_xpm_file_to_image(data->mlx_ptr, "./img/f.xpm", &w, &w);
 	if (!data->img_f)
 		return (ft_printf("f\n"), 0);
-	data->img_e = mlx_xpm_file_to_image(data->mlx_ptr, "./images/damier.xpm", &w, &w);
+	data->img_e = mlx_xpm_file_to_image(data->mlx_ptr, "./img/e.xpm", &w, &w);
 	if (!data->img_e)
 		return (ft_printf("e\n"), 0);
 	return (1);
@@ -67,10 +59,10 @@ t_item	*ft_lstnew(int x, int y)
 	elem = malloc(sizeof(t_item));
 	if (!elem)
 		return (NULL);
-	elem->next = NULL;
 	elem->x = x;
 	elem->y = y;
 	elem->active = 1;
+	elem->next = NULL;
 	return (elem);
 }
 
@@ -115,27 +107,135 @@ void lst_item(char **map, t_item **lst)
 	}
 }
 
-int loop(t_map *data, char **map)
+
+// void	display_list_item(t_item *begin)
+// {
+// 	t_item	*list;
+
+// 	list = begin;
+// 	if (list)
+// 	{
+// 		while (list)
+// 		{
+// 			ft_printf("x : %d\n", list->x);
+// 			ft_printf("y : %d\n", list->y);
+// 			ft_printf("acive : %d\n", list->active);
+// 			list = list->next;
+// 		}
+// 	}
+// }
+
+void modif_pos2(char c, int k, t_map *data)
 {
-	t_item *lst;
+	if (c == 'x')
+	{
+		if (k > 0)
+			data->pos_x++;
+		else if (k < 0)
+			data->pos_x--;
+	}
+	else if (c == 'y')
+	{
+		if (k > 0)
+			data->pos_y++;
+		else if (k < 0)
+			data->pos_y--;
+	}
+	data->moves++;
+	ft_printf("moves = %d\n", data->moves);
+}
+void modif_pos(int keycode, t_map *param)
+{
+	int x;
+	int y;
 	
+	y = param->pos_y;
+	x = param->pos_x;
+	if (keycode == 119)
+		if (param->map[x - 1][y] != '1')
+			modif_pos2('x', -1, param);	
+	if (keycode == 115)
+		if (param->map[x + 1][y] != '1')
+			modif_pos2('x', 1, param);	
+	if (keycode == 97)
+		if (param->map[x][y - 1] != '1')
+			modif_pos2('y', -1, param);	
+	if (keycode == 100)
+		if (param->map[x][y + 1] != '1')
+			modif_pos2('y', 1, param);	
+}
+
+int	key_hook(int keycode, t_map *param)
+{
+	void	*win_ptr;
+	void	*mlx_ptr;
+	
+	if (keycode == 65307)
+	{
+		win_ptr = param->win_ptr;
+		mlx_ptr = mlx_get_data_addr(win_ptr, NULL, NULL, NULL);
+		mlx_destroy_window(mlx_ptr, win_ptr);
+	}
+	else if (keycode == 119 || keycode == 115 || keycode == 97
+			|| keycode == 100)
+	{
+		modif_pos(keycode, param);
+		if (param->map[param->pos_x][param->pos_y] == 'C')
+			param->map[param->pos_x][param->pos_y] = '0';
+	}
+	return (0);
+}
+
+int still_collectible(t_map *data)
+{
+	int i;
+	int j;
+
+	i = 1;
+	while (data->map[i])
+	{
+		j = 1;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'C')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	loop_hook(t_map *data)
+{
+	if (!still_collectible(data))
+		if (data->map[data->pos_x][data->pos_y] == 'E')
+			close_window(data->win_ptr);
+	display_map(data); // Afficher la map
+	return (0);
+}
+
+int	loop(t_map *data)
+{
+	data->moves = 0;
+	data->item = NULL;
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		return (0);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->width, data->height, "So_long");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->width, data->height,
+			"So_long");
 	if (data->win_ptr == NULL)
 		return (free(data->win_ptr), 0);
 	if (load_img(data) == 0)
 		return (ft_printf("error image\n"), 0);
-	lst_item(map, &lst);
-	if (!map)
+	lst_item(data->map, &data->item);
+	if (!data->map)
 		return (ft_printf("Error lst_item\n"), 0);
-	data->pos_x = findX(map);
-	data->pos_y = findY(map);
-	ft_printf("j = %d\ni = %d\n", lst->y, lst->x);
-	display_map(data, map, &lst);
-	mlx_hook(data->win_ptr, 2, 1L << 0, key_hook, data->win_ptr);  // "ESC" pour fermer 
-	mlx_hook(data->win_ptr, 17, 1L << 17, close_window, data->win_ptr); // Croix pour fermer
-    mlx_loop(data->mlx_ptr); // boucle affichage fenetre
+	data->pos_x = findX(data->map);
+	data->pos_y = findY(data->map);
+	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
+	mlx_hook(data->win_ptr, 2, 1L << 0, key_hook, data); // "ESC" pour fermer
+	mlx_hook(data->win_ptr, 17, 1L << 17, close_window, data); // Croix pour fermer
+	mlx_loop(data->mlx_ptr); // boucle affichage fenetre
 	return (1);
 }

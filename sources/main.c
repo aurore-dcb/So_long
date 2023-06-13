@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/02 16:27:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/13 09:03:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int findX(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-				return (j);
+				return (i);
 			j++;
 		}
 		i++;
@@ -46,7 +46,7 @@ int findY(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-				return (i);
+				return (j);
 			j++;
 		}
 		i++;
@@ -57,7 +57,6 @@ int	main(int argc, char **argv)
 {
 	t_lign	*list;
 	t_map	data;
-	char **map;
 
 	list = NULL;
 	if (!parsing(argc, argv, &list))
@@ -70,10 +69,10 @@ int	main(int argc, char **argv)
 	data.win_ptr = NULL;
 	data.height = ft_lstsize(list) * 64;
 	data.width = list->lign_len * 64;
-	map = list_to_tab(&list);
-	if (!map)
+	data.map = list_to_tab(&list);
+	if (!data.map)
 		return (free_list(&list), 0);
-	if (!loop(&data, map))
+	if (!loop(&data))
 	{
 		ft_printf("Error Loop\n");
 		return (free_list(&list), 0);
