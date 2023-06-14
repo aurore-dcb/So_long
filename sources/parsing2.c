@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:28:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 13:18:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:16:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	five_char(t_lign **begin)
 		{
 			if (list->lign[i] != '0' && list->lign[i] != '1'
 				&& list->lign[i] != 'C' && list->lign[i] != 'E'
-				&& list->lign[i] != 'P' && list->lign[i] != 'W')
+				&& list->lign[i] != 'P' && list->lign[i] != 'Z')
 			{
 				free_list(begin);
 				return (0);

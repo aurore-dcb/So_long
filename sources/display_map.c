@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:17:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 13:33:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:15:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	display_map2(t_map *data, int i, int j)
 	else if (data->map[i][j] == 'C')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_c, j
 			* 64, i * 64);
-	else if (data->map[i][j] == 'W')
+	else if (data->map[i][j] == 'Z')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_z, j
 			* 64, i * 64);
 	else
