@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:45:59 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 14:14:12 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 10:29:08 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "../libft/libft.h"
 #include "../minilibx-linux/mlx.h"
 
-int	key_hook(int keycode, t_map *param)
+int	key_hook(int keycode, t_map *data)
 {
 	if (keycode == XK_Escape)
-		mlx_loop_end(param->mlx_ptr);
-	else if (keycode == 119 || keycode == 115 || keycode == 97
-		|| keycode == 100)
+		mlx_loop_end(data->mlx_ptr);
+	else if (keycode == XK_w || keycode == XK_s || keycode == XK_a
+		|| keycode == XK_d)
 	{
-		if (modif_pos(keycode, param))
-			display_map(param);
-		if (param->map[param->pos_x][param->pos_y] == 'C')
-			param->map[param->pos_x][param->pos_y] = '0';
+		if (modif_pos(keycode, data))
+			display_map(data);
+		if (data->map[data->pos_x][data->pos_y] == 'C')
+			data->map[data->pos_x][data->pos_y] = '0';
 	}
 	return (1);
 }

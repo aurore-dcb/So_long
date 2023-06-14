@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:28:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 11:33:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 09:53:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	five_char(t_lign **begin)
 	t_lign	*list;
 
 	list = *begin;
+	if (!list)
+		return (0);
 	while (list)
 	{
 		i = 0;
@@ -113,6 +115,8 @@ int	walls(t_lign **begin)
 
 	i = 0;
 	list = *begin;
+	if (!list)
+		return (0);
 	while (list->lign[i])
 		if (list->lign[i++] != '1')
 			return (free_list(begin), 0);

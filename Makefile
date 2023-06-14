@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/06/13 10:54:55 by aducobu          ###   ########.fr        #
+#    Updated: 2023/06/14 10:54:31 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS =	sources/main.c \
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux  #-lm -lz
+CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux
 MLX_FLAGS = -lmlx -lXext -lX11
 RM = rm -rf
 
@@ -36,7 +36,7 @@ LIBFT_LIB	= libft/libft.a
 MLX_DIR		= minilibx-linux
 MLX_LIB		= minilibx-linux/libmlx_Linux.a
 
-all:		${NAME}
+all:		libft ${NAME}
 
 libft/libft.a:
 			make -C libft
@@ -57,5 +57,3 @@ fclean:		clean
 			make -C libft fclean
 
 re:			fclean all
-			make -C ${LIBFT_DIR} re
-			make -C ${MLX_DIR} re

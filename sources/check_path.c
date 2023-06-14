@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:49:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 11:39:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:03:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ int	to_cross(char c)
 	return (c != '1' && c != 'X' && c != 'P');
 }
 
-void	apply_cross(int i, int j, char **map)
-{
-	if (map[i][j] == 'E')
-		map[i][j] = '1';
-	else
-		map[i][j] = 'X';
-}
-
 int	add_cross(char **map, int i, int j)
 {
 	int	res;
@@ -34,22 +26,22 @@ int	add_cross(char **map, int i, int j)
 	if (to_cross(map[i - 1][j]))
 	{
 		res = 1;
-		apply_cross(i - 1, j, map);
+		map[i - 1][j] = 'X';
 	}
 	if (to_cross(map[i][j + 1]))
 	{
 		res = 1;
-		apply_cross(i, j + 1, map);
+		map[i][j + 1] = 'X';
 	}
 	if (to_cross(map[i + 1][j]))
 	{
 		res = 1;
-		apply_cross(i + 1, j, map);
+		map[i + 1][j] = 'X';
 	}
 	if (to_cross(map[i][j - 1]))
 	{
 		res = 1;
-		apply_cross(i, j - 1, map);
+		map[i][j - 1] = 'X';
 	}
 	return (res);
 }
@@ -60,15 +52,15 @@ void	cross_map(char **map)
 	int	j;
 	int	modif;
 
-	i = 1;
-	j = 1;
+	i = 0;
+	j = 0;
 	modif = 1;
 	while (modif == 1)
 	{
 		modif = 0;
 		while (map[i + 1])
 		{
-			j = 1;
+			j = 0;
 			while (map[i][j + 1])
 			{
 				if (map[i][j] == 'X' || map[i][j] == 'P')
@@ -78,7 +70,7 @@ void	cross_map(char **map)
 			}
 			i++;
 		}
-		i = 1;
+		i = 0;
 	}
 }
 

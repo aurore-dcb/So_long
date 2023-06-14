@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:21:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 10:57:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 09:45:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	create_list(t_lign **list, char *file)
 	if (fd == -1)
 		return (0);
 	lign = get_next_line(fd);
+	if (!lign)
+		return (0);
 	while (lign)
 	{
 		if (!ft_list_push_back(list, lign))

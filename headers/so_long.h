@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 14:14:17 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:44:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -43,19 +42,21 @@ typedef struct s_map
 	void			*img_c;
 	void			*img_e;
 	void			*img_f;
-	void			*img_p;
+	void			*img_p_right;
+	void			*img_p_left;
 	void			*img_w;
 
 	int				pos_x;
 	int				pos_y;
 	int				moves;
+	int				right;
 }					t_map;
 
 // frees.c
 void				free_list(t_lign **begin);
 void				free_tab(char **tab);
 void				free_mlx(t_map *data);
-void				free_map(t_map *data);
+void				free_all(t_map *data, t_lign **list);
 
 // parsing2.c
 int					extension(char *s);
@@ -87,7 +88,6 @@ char				**list_to_tab(t_lign **begin);
 
 // check_path.c
 int					to_cross(char c);
-void				apply_cross(int i, int j, char **map);
 int					add_cross(char **map, int i, int j);
 void				cross_map(char **map);
 int					valid_path(char **map);
@@ -97,14 +97,14 @@ void				display_number(t_map *data);
 int					display_map(t_map *data);
 
 // close_window.c
-int					close_window(t_map *param);
-int					key_hook(int keycode, t_map *param);
+int					close_window(t_map *data);
+int					key_hook(int keycode, t_map *data);
 int					loop_hook(t_map *data);
 
 // init_loop.c
 int					load_img(t_map *data);
 int					modif_pos2(char c, int k, t_map *data);
-int					modif_pos(int keycode, t_map *param);
+int					modif_pos(int keycode, t_map *data);
 int					still_collectible(t_map *data);
 void				loop(t_map *data);
 

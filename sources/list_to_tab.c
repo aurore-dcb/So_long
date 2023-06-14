@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:26:18 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 11:41:09 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 10:15:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**list_to_tab(t_lign **begin)
 	t_lign	*lst;
 
 	lst = *begin;
+	if (!lst)
+		return (0);
 	map = malloc(sizeof(char *) * (ft_lstsize(*begin) + 1));
 	if (!map)
 		return (NULL);

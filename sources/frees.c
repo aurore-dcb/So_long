@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:33:09 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/13 14:19:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:45:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	free_tab(char **tab)
 
 void	free_mlx(t_map *data)
 {
-	if (data->img_p)
-		mlx_destroy_image(data->mlx_ptr, data->img_p);
+	if (data->img_p_left)
+		mlx_destroy_image(data->mlx_ptr, data->img_p_left);
+	if (data->img_p_right)
+		mlx_destroy_image(data->mlx_ptr, data->img_p_right);
 	if (data->img_c)
 		mlx_destroy_image(data->mlx_ptr, data->img_c);
 	if (data->img_e)
@@ -56,8 +58,9 @@ void	free_mlx(t_map *data)
 	free(data->mlx_ptr);
 }
 
-void	free_map(t_map *data)
+void	free_all(t_map *data, t_lign **list)
 {
 	free_mlx(data);
 	free_tab(data->map);
+	free_list(list);
 }

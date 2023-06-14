@@ -30,7 +30,7 @@ CC 				= gcc
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror
 
-all:			${NAME} gnl printf 
+all:			gnl printf ${NAME}
 
 ${NAME}:		${OBJS}
 						ar rcs ${NAME} ${OBJS}
@@ -50,6 +50,6 @@ clean:
 fclean:			clean
 						${RM} ${NAME}
 	
-re:				fclean ${NAME}
+re:				fclean all
 
 .PHONY: all clean fclean re bonus
