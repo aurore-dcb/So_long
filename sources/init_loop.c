@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:13:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 11:38:52 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 14:59:37 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	load_img(t_map *data)
 	data->img_f = NULL;
 	data->img_w = NULL;
 	data->img_e = NULL;
+	data->img_z = NULL;
 	data->img_p_left = mlx_xpm_file_to_image(data->mlx_ptr, "./img/p_left.xpm",
 			&w, &w);
 	data->img_p_right = mlx_xpm_file_to_image(data->mlx_ptr,
@@ -32,8 +33,9 @@ int	load_img(t_map *data)
 	data->img_w = mlx_xpm_file_to_image(data->mlx_ptr, "./img/w.xpm", &w, &w);
 	data->img_f = mlx_xpm_file_to_image(data->mlx_ptr, "./img/f.xpm", &w, &w);
 	data->img_e = mlx_xpm_file_to_image(data->mlx_ptr, "./img/e.xpm", &w, &w);
+	data->img_z = mlx_xpm_file_to_image(data->mlx_ptr, "./img/z.xpm", &w, &w);
 	if (!data->img_p_left || !data->img_p_right || !data->img_c || !data->img_w
-		|| !data->img_f || !data->img_e)
+		|| !data->img_f || !data->img_e || !data->img_z)
 		return (0);
 	return (1);
 }
@@ -66,17 +68,28 @@ int	modif_pos2(char c, int k, t_map *data)
 
 int	modif_pos(int keycode, t_map *data)
 {
+	int	x;
+	int	y;
+
+	x = data->pos_x;
+	y = data->pos_y;
+	if (find_ennemi(keycode, data))
+	{
+		ft_printf("YOU LOST THE GAME\n");
+		mlx_loop_end(data->mlx_ptr);
+		return (0);
+	}
 	if (keycode == 119)
-		if (data->map[data->pos_x - 1][data->pos_y] != '1')
+		if (data->map[x - 1][y] != '1')
 			modif_pos2('x', -1, data);
 	if (keycode == 115)
-		if (data->map[data->pos_x + 1][data->pos_y] != '1')
+		if (data->map[x + 1][y] != '1')
 			modif_pos2('x', 1, data);
 	if (keycode == 97)
-		if (data->map[data->pos_x][data->pos_y - 1] != '1')
+		if (data->map[x][y - 1] != '1')
 			return (modif_pos2('y', -1, data));
 	if (keycode == 100)
-		if (data->map[data->pos_x][data->pos_y + 1] != '1')
+		if (data->map[x][y + 1] != '1')
 			return (modif_pos2('y', 1, data));
 	return (1);
 }

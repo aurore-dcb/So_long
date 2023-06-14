@@ -6,28 +6,28 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/06/14 10:54:31 by aducobu          ###   ########.fr        #
+#    Updated: 2023/06/14 15:03:14 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRCS =	sources/main.c \
-		sources/parsing.c \
-		sources/parsing2.c \
+SRCS =	sources/check_path.c \
 		sources/create_list.c \
-		sources/utils.c \
-		sources/list_to_tab.c \
-		sources/check_path.c \
-		sources/frees.c \
-		sources/init_loop.c \
 		sources/display_map.c \
-		sources/hook.c
+		sources/frees.c \
+		sources/hook.c \
+		sources/init_loop.c \
+		sources/list_to_tab.c \
+		sources/main.c \
+		sources/parsing2.c \
+		sources/parsing.c \
+		sources/utils.c
 
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -Lminilibx-linux
+CFLAGS = -Wall -Wextra -Werror -Lminilibx-linux
 MLX_FLAGS = -lmlx -lXext -lX11
 RM = rm -rf
 
@@ -56,4 +56,9 @@ fclean:		clean
 			${RM} ${NAME}
 			make -C libft fclean
 
+norm:
+			norminette sources
+			norminette libft
+			norminette headers
+			
 re:			fclean all

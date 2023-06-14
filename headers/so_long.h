@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 11:44:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 14:59:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_map
 	void			*img_p_right;
 	void			*img_p_left;
 	void			*img_w;
+	void			*img_z;
 
 	int				pos_x;
 	int				pos_y;
@@ -84,7 +85,7 @@ int					create_list(t_lign **list, char *file);
 
 // list_to_tab.c
 char				**list_to_tab(t_lign **begin);
-// void				display_tab(char **map);
+void				display_tab(char **map);
 
 // check_path.c
 int					to_cross(char c);
@@ -96,8 +97,8 @@ int					valid_path(char **map);
 void				display_number(t_map *data);
 int					display_map(t_map *data);
 
-// close_window.c
-int					close_window(t_map *data);
+// hook.c
+int					find_ennemi(int keycode, t_map *data);
 int					key_hook(int keycode, t_map *data);
 int					loop_hook(t_map *data);
 

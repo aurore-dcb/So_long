@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 13:49:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 11:03:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 13:24:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	to_cross(char c)
 {
-	return (c != '1' && c != 'X' && c != 'P');
+	return (c != '1' && c != 'X' && c != 'P' && c != 'W');
 }
 
 int	add_cross(char **map, int i, int j)
