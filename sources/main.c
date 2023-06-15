@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:12:25 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 14:56:27 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:39:19 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ int	main(int argc, char **argv)
 
 	list = NULL;
 	if (!parsing(argc, argv, &list))
-	{
-		ft_printf("Error\nParsing\n");
 		return (free_list(&list), -1);
-	}
 	data.mlx_ptr = NULL;
 	data.win_ptr = NULL;
 	data.height = ft_lstsize(list) * 64;
@@ -72,7 +69,7 @@ int	main(int argc, char **argv)
 	data.map = list_to_tab(&list);
 	data.right = 1;
 	if (!data.map)
-		return (0);
+		return (ft_printf("Error"));
 	loop(&data);
 	free_all(&data, &list);
 	return (0);

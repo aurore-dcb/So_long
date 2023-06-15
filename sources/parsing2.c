@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:28:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 15:16:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:30:57 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	composition(t_lign **begin)
 	return (1);
 }
 
-int	five_char(t_lign **begin)
+int	six_char(t_lign **begin)
 {
 	int		i;
 	t_lign	*list;

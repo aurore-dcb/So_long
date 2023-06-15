@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:26:18 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 13:22:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:06:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,4 @@ char	**list_to_tab(t_lign **begin)
 	}
 	map[i] = 0;
 	return (map);
-}
-
-void	display_tab(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("---- map ----\n");
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			ft_printf("%c", map[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("---- fin map ----\n");
 }

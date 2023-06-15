@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:13:44 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 14:59:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:51:27 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,15 @@ void	loop(t_map *data)
 {
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
+	{
+		ft_printf("Error\n");
 		return ;
+	}
 	data->moves = 0;
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->width, data->height,
 			"So_long");
 	if (data->win_ptr == NULL)
-		return (free(data->win_ptr));
+		return (ft_printf("Error\n"), free(data->win_ptr));
 	if (load_img(data) == 0)
 	{
 		ft_printf("Error\nImage not load\n");

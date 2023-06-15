@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 09:04:16 by aducobu           #+#    #+#              #
-#    Updated: 2023/06/14 15:03:14 by aducobu          ###   ########.fr        #
+#    Updated: 2023/06/15 15:42:46 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ minilibx-linux/libmlx_Linux.a:
 			make -C minilibx-linux
 
 ${NAME}:	${OBJS} libft/libft.a minilibx-linux/libmlx_Linux.a
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT_LIB} ${MLX_LIB} ${MLX_FLAGS} #-Llibft -lft
+			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT_LIB} ${MLX_LIB} ${MLX_FLAGS}
 
 clean:
 			${RM} ${OBJS}

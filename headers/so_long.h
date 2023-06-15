@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 09:14:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 14:59:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:06:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void				free_all(t_map *data, t_lign **list);
 int					extension(char *s);
 int					is_rectangle(t_lign **begin);
 int					composition(t_lign **begin);
-int					five_char(t_lign **begin);
+int					six_char(t_lign **begin);
 int					walls(t_lign **begin);
 
 // parsing.c
@@ -81,11 +81,9 @@ int					item_in_lign(char c, char *str);
 t_lign				*ft_new_elem(char *str);
 int					ft_list_push_back(t_lign **begin, char *lign);
 int					create_list(t_lign **list, char *file);
-// void				display_list(t_lign *begin);
 
 // list_to_tab.c
 char				**list_to_tab(t_lign **begin);
-void				display_tab(char **map);
 
 // check_path.c
 int					to_cross(char c);

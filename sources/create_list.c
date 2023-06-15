@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 10:21:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 09:45:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:37:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ int	create_list(t_lign **list, char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (ft_printf("Error\nCan't open file\n"), 0);
 	lign = get_next_line(fd);
 	if (!lign)
-		return (0);
+		return (ft_printf("Error\n"), 0);
 	while (lign)
 	{
 		if (!ft_list_push_back(list, lign))
 		{
 			free_list(list);
-			return (0);
+			return (ft_printf("Error\n"), 0);
 		}
 		free(lign);
 		lign = get_next_line(fd);
@@ -96,23 +96,3 @@ int	create_list(t_lign **list, char *file)
 	free(lign);
 	return (1);
 }
-
-// a supprimer a la fin
-// void	display_list(t_lign *begin)
-// {
-// 	t_lign	*list;
-
-// 	list = begin;
-// 	if (list)
-// 	{
-// 		while (list)
-// 		{
-// 			ft_printf("lign : %s.\n", list->lign);
-// 			ft_printf("len : %d\n", list->lign_len);
-// 			ft_printf("exit : %d\n", list->nb_exit);
-// 			ft_printf("pos : %d\n", list->nb_pos);
-// 			ft_printf("item : %d\n\n", list->nb_item);
-// 			list = list->next;
-// 		}
-// 	}
-// }

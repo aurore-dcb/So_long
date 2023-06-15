@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:45:59 by aducobu           #+#    #+#             */
-/*   Updated: 2023/06/14 15:15:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:47:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	find_ennemi(int keycode, t_map *data)
 
 	x = data->pos_x;
 	y = data->pos_y;
-	if (keycode == 119)
+	if (keycode == XK_w)
 		if (data->map[x - 1][y] == 'Z')
 			return (1);
-	if (keycode == 115)
+	if (keycode == XK_s)
 		if (data->map[x + 1][y] == 'Z')
 			return (1);
-	if (keycode == 97)
+	if (keycode == XK_a)
 		if (data->map[x][y - 1] == 'Z')
 			return (1);
-	if (keycode == 100)
+	if (keycode == XK_d)
 		if (data->map[x][y + 1] == 'Z')
 			return (1);
 	return (0);
